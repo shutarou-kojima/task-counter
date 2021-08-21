@@ -68,21 +68,9 @@ past
 scrollToSelectedTask() {
 
 
-◆データ更新
-  LocalStorageから読み込み
-readProjectData() {
 
-◆データ更新
-  LocalStorageからの読み込み 一番最初の！
-init() {
 
-◆データ更新
-  li.task要素から、データを作成 
-parseTaskObject(_$task) { return taskObject
 
-◆データ更新
-  今のtask-areaのHTMLから、データを抽出する
-parseData() { return projectData
 
 
 ★見た目
@@ -93,20 +81,12 @@ generateTaskAreaHTML() {
   タスク配列から、子タスクを含んだ状態でのjQオブジェクトを作成し、appendする
 makeTaskWithChildren(tasks) {
 
-◆データ更新
-  LocalStorageに上書き保存
-saveProjectData() {
-
-◆データ更新
-  LocalStorageから"projectData"を削除
-resetProjectData() {
-
-  // クリックイベント タスク選択
-
-  // クリックイベント 子タスクの 表示／非表示
 
 
- function toggleStopCount() {
+
+
+〓　コントロール
+toggleStopCount() {
 
 
 calcCount(_duration) {
@@ -146,48 +126,95 @@ refreshHasSelectedChild() {
 
 refreshHasChildren() {
 
-setSelectedTask(_index) {
 
-changeSelectedTask(_direction) {
 
-moveSelectedTask(_direction) {
+
+
+
+
+
+
+doPrompt(_msg = "", _defaultValue = "", _func = console.log) {
+
+
+
+makeNewTask(_taskObj) {
+
+
+
+◆
+
+
+
+addDuration(_diff = 0, _$target = $(".selected-task")) {
+
+getDuration(_$target = $(".selected-task")) {
+
+
+
+◆タスク操作
+
+
 
 shiftParent() {
 
 shiftChild() {
 
-deleteSelectedTask() {
+addTaskAsBrother() {
 
-doPrompt(_msg = "", _defaultValue = "", _func = console.log) {
+moveSelectedTask(_direction) {
 
 renameSelectedTask() {
 
-makeNewTask(_taskObj) {
+deleteSelectedTask() {
 
-addTaskAsBrother() {
+setSelectedTask(_index) {
 
-addDuration(_diff = 0, _$target = $(".selected-task")) {
+changeSelectedTask(_direction) {
 
-getDuration(_$target = $(".selected-task")) {
+
+
+
+
+◆LocalStorage
+
+ls.set(data)
+// LocalStorageに上書き保存
+saveProjectData() {
+
+ls.remove()
+// LocalStorageから"projectData"を削除
+resetProjectData() {
+
+
+ls.get
+// LocalStorageから読み込み
+readProjectData() {
+
+New LocalStorage()
+// LocalStorageからの読み込み 一番最初の！
+init() {
+
+
+◆データ更新
+  li.task要素から、データを作成 
+parseTaskObject(_$task) { return taskObject
+
+◆データ更新
+  今のtask-areaのHTMLから、データを抽出する
+parseData() { return projectData
+
+
+
+イベント系
+
+  // クリックイベント タスク選択
+
+  // クリックイベント 子タスクの 表示／非表示
 
   setInterval
 
   addEventListener('beforeunload'
 
   addEventListener("keydown"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

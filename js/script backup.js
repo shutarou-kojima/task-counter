@@ -2,19 +2,11 @@
 // 後回し: <<
 // 要検討: think
 
-
 /** High    footerを意識したmarginがない */
+
 
 /** High    追加時に、フォーカス移動のanimationが動かない */
 
-/**   initFullCountを修正する
- *     rootタスクだけ和を求める様に修正
- * 
- * 
- */
-
-/** 初期読み込みの反映時,  .has-children全体に計算させる関数を用意する
-*/
 
 
 /** High   full-countの部分が、タスクが消えた時に減らない！
@@ -54,392 +46,46 @@
 */
 
 
-/** Low <<   initial.JSON結局使ってない
- * 結構面倒くさそうだから、後回し。
- * 現状、何とかなってるし、よしよし
-*/
-
-
-
-
-
-
-
 /** Low    クリックイベントが登録出来てない。
  * section.task-area全体に登録して、$(this)で振り分けした方が良いかもしれない。
  */
 
 
-let templateProjectData = [
-  [
-    {
-      "name": "このアプリについて",
-      "count": 0,
-      "isHide": false,
-      "duration": 28,
-      "isSelected": false
-    },
-    [
-      {
-        "name": "このアプリは、作業時間を細かく計測したいが為に作ったアプリです。",
-        "count": 0,
-        "isHide": false,
-        "duration": 6,
-        "isSelected": false
-      }
-    ],
-    [
-      {
-        "name": "赤枠が選択中のタスクです。",
-        "count": 0,
-        "isHide": false,
-        "duration": 5,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "選択中のタスクは、１分経過毎に　　ここが増加します→",
-          "count": 0,
-          "isHide": false,
-          "duration": 10,
-          "isSelected": false
-        }
-      ]
-    ],
-  ],
-  [
-    {
-      "name": "操作方法について",
-      "count": 0,
-      "isHide": true,
-      "duration": 8,
-      "isSelected": false
-    },
-    [
-      {
-        "name": "[↑] ／ [↓]",
-        "count": 0,
-        "isHide": false,
-        "duration": 7,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "選択中のタスクを変更します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "この赤枠が移動します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": true
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[←] ／ [→]",
-        "count": 0,
-        "isHide": true,
-        "duration": 6,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "計測時間を＋１分／－１分修正します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "「休憩してたのに、カウントが進んでた！」って時用の機能です。",
-          "count": 0,
-          "isHide": false,
-          "duration": 5,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[Space]",
-        "count": 0,
-        "isHide": true,
-        "duration": 3,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "計測のスタート／ストップを切り替えます。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[Enter]",
-        "count": 0,
-        "isHide": true,
-        "duration": 2,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "新しいタスクを追加します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 2,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "選択中のタスクの１つ下に追加されます。",
-          "count": 0,
-          "isHide": false,
-          "duration": 2,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "同じ階層の、兄弟タスクとして追加されます。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "選択中のタスクは、追加されたタスクに移動します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[H]",
-        "count": 1,
-        "isHide": false,
-        "duration": 9,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "子孫タスクの表示／非表示を切り替えます。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[F2]",
-        "count": 0,
-        "isHide": true,
-        "duration": 2,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "選択中のタスクの名前を変更します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[Delete]",
-        "count": 0,
-        "isHide": true,
-        "duration": 6,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "選択中のタスクを削除します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 5,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "子孫タスクも巻き込んで、全部消えます！",
-          "count": 0,
-          "isHide": false,
-          "duration": 2,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[Shift] + [↑] ／ [↓]",
-        "count": 0,
-        "isHide": true,
-        "duration": 12,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "選択中のタスクの位置を上下移動させます。",
-          "count": 0,
-          "isHide": false,
-          "duration": 9,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "その際、子孫タスクも一緒に移動します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[Shift] + [→]",
-        "count": 0,
-        "isHide": true,
-        "duration": 12,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "選択中のタスクを子要素にします。",
-          "count": 0,
-          "isHide": false,
-          "duration": 9,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "その際、子孫タスクも一緒に移動します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[Shift] + [←]",
-        "count": 0,
-        "isHide": true,
-        "duration": 12,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "選択中のタスクを、親要素に移動させます。",
-          "count": 0,
-          "isHide": false,
-          "duration": 9,
-          "isSelected": false
-        }
-      ],
-      [
-        {
-          "name": "その際、子孫タスクも一緒に移動します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 3,
-          "isSelected": false
-        }
-      ]
-    ],
-    [
-      {
-        "name": "[Shift] + [Enter]",
-        "count": 0,
-        "isHide": true,
-        "duration": 11,
-        "isSelected": false
-      },
-      [
-        {
-          "name": "新しい子タスクを追加します。",
-          "count": 0,
-          "isHide": false,
-          "duration": 1,
-          "isSelected": false
-        }
-      ]
-    ]
-  ]
-];
 
 let projectData = [];
+let isStopCount = true;
+
 
 $(document).ready(function () {
 
 
 
   function scrollToSelectedTask() {
-
+    // setTimeout(() => {
     let offsetSelectedTask = $('.selected-task').offset().top;
     let offsetWindow = $(window).scrollTop();
     let bodyHeight = $("body").height();
     let windowHeight = $(window).height();
     let marginTop = 30;
     let marginBottom = 50;
-    let distanceTop = offsetSelectedTask - offsetWindow - marginTop;
-    let distanceBottom = (offsetWindow + windowHeight) - offsetSelectedTask - marginBottom;
+    let distanceTop = (offsetSelectedTask - marginTop) - offsetWindow;
+    let distanceBottom = (offsetWindow + windowHeight) - (offsetSelectedTask + marginBottom);
 
-    console.log(distanceBottom);
-
+    console.log("db: " + distanceBottom);
+    let scrollDegrees;
     if (distanceBottom < 0) {
-      let scrollDegrees = (offsetWindow + windowHeight) - marginBottom;
-      $('html, body').animate({ scrollTop: scrollDegrees }, 80);
-
+      scrollDegrees = offsetSelectedTask - marginBottom;
+    } else if (distanceTop < 0) {
+      scrollDegrees = offsetSelectedTask - marginTop;
     }
-    if (distanceTop < 0) {
-      let scrollDegrees = offsetSelectedTask - marginTop;
-      $('html, body').animate({ scrollTop: scrollDegrees }, 80);
-    }
+    $('html, body').animate({ scrollTop: scrollDegrees }, 80);
+    // }, 100);
   }
 
   // LocalStorageから読み込み
   function readProjectData() {
     let dataString = localStorage.getItem("projectData");
     let projectData = JSON.parse(dataString);
-    return projectData;
-  }
-
-  function test() {
-    localStorage.setItem("projectData", JSON.stringify(templateProjectData));
-
-    let projectData = localStorage.getItem("projectData");
-    console.log(projectData);
-    console.log(JSON.parse(projectData));
     return projectData;
   }
 
@@ -450,7 +96,7 @@ $(document).ready(function () {
     return projectData;
   }
 
-  
+
   // task objectのクラスを作成しよう！
   // この関数は、parseTaskTreeにしょう！
   function parseTaskObject(_$task) {
@@ -485,24 +131,23 @@ $(document).ready(function () {
 
   // 反映
   function generateTaskAreaHTML() {
-
     let projectData = init();
-    // console.log(projectData);
     let $area = $("section.task-area");
     let $taskList = $area.children("ul.task-list");
     for (let i = 0; i < projectData.length; i++) {
       let $task = makeTaskWithChildren(projectData[i]);
       $taskList.append($task);
     }
-    initParentsCount();
-    initFullCount();
     refreshHasChildren();
     refreshHasSelectedChild();
-    setTimeout(scrollToSelectedTask, 100);
+    initParentsCount();
+    initFullCount();
+    scrollToSelectedTask();
   }
 
+  // タスク配列から、子タスクを含んだ状態でのjQオブジェクトを作成し、appendする
   function makeTaskWithChildren(tasks) {
-    let $parent = makeNewTask(...Object.values(tasks[0]));
+    let $parent = makeNewTask(tasks[0]);
     if (tasks.length > 1) {
       let $taskList = $parent.children("ul.task-list");
       for (let i = 1; i < tasks.length; i++) {
@@ -547,7 +192,6 @@ $(document).ready(function () {
     });
     
     */
-  let isStopCount = true;
 
   function toggleStopCount() {
     let $countStatus = $("section.full-count-area>div.count-status");
@@ -588,22 +232,24 @@ $(document).ready(function () {
   }
 
 
-  function setFullCount(_count){
+  function setFullCount(_count) {
     let $fullCount = $("#full_count");
     $fullCount.text(_count);
   }
 
-  function getFullCount(){
+  function getFullCount() {
     let $fullCount = $("#full_count");
     let result = $fullCount.text() - 0;
     return result;
   }
 
   // 初期読み込み時、子要素を持つタスクのcountを設定する。
-  function initParentsCount(){
+  function initParentsCount() {
     let $parents = $(".has-children");
+    console.log($parents.length);
     for (let i = $parents.length - 1; -1 < i; i--) {
       let $parent = $parents.eq(i);
+      console.log($parent.children(".task-name").text());
       setCount($parent);
     }
   }
@@ -619,14 +265,6 @@ $(document).ready(function () {
     }
   }
 
-  // 置換 setCount jq objを引数にcountを設定、それによる親タスクの変更も対応
-  function addCount(_minute) {
-    let $count = $(".selected-task>.task-count");
-    let count = $count.text() - 0;
-    $count.text(count + _minute);
-  }
-
-  // 置換 setFullCount 最上層タスクのcountの和を登録する。
   function addFullCount(_minute) {
     let fullCount = getFullCount();
     setFullCount(fullCount + _minute);
@@ -637,15 +275,15 @@ $(document).ready(function () {
   function initFullCount() {
     let $rootTasks = $("section.task-area>ul.task-list>li.task");
     let fullCount = 0;
-    for (let i = 0; i < $counts.length; i++) {
-      fullCount += $rootTasks.eq(i).text() - 0;
+    for (let i = 0; i < $rootTasks.length; i++) {
+      fullCount += $rootTasks.eq(i).children(".task-count").text() - 0;
     }
     setFullCount(fullCount);
-    // $("#full_count").text(fullCount);
   }
 
   function canDownCount() {
-    let count = $(".selected-task>.task-count").text() - 0;
+    let duration = $(".selected-task").data("duration") - 0;
+    let count = calcCount(duration);
     return count > 0;
   }
 
@@ -785,9 +423,11 @@ $(document).ready(function () {
   }
 
   function makeNewTask(_taskObj) {
-    let taskObject
-    let classHide = isHide ? " hide-children" : "";
-    let classSelected = isSelected ? " selected-task" : "";
+    let classHide = _taskObj.isHide ? " hide-children" : "";
+    let classSelected = _taskObj.isSelected ? " selected-task" : "";
+    let name = _taskObj.name || "ダミー";
+    let duration = _taskObj.duration || 0;
+    let count = calcCount(duration);
     $newTask = $(
       `<li class='task${classHide}${classSelected}' data-duration=${duration}>\
         <span class='task-name'>${name}</span>\
@@ -802,7 +442,7 @@ $(document).ready(function () {
     doPrompt("新しいタスクを追加します。", "新規 タスク名", (_res) => {
       let index = getIndexOfSelectedTask();
       $(".selected-task").removeClass("selected-task");
-      let $newTask = makeNewTask(_res).addClass("selected-task");
+      let $newTask = makeNewTask({ name: _res, isSelected: true });
       $("li.task").eq(index).after($newTask);
     });
   }
@@ -953,7 +593,6 @@ $(document).ready(function () {
         break;
     }
   });
-  // test();
   generateTaskAreaHTML();
 });
 
