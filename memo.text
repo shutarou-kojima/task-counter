@@ -1,0 +1,193 @@
+classで整理する。
+ + classを一つのモノとして定義する。
+   + task class
+   + task-tree class
+   + controller class
+ + 見えてるもの、そのものを class にする.
+
+機能
+ + 作業時間 count
+
+taskObj = {
+  name:
+  ...
+
+  children:[
+    taskObj,
+    taskObj,
+    taskObj...
+  ]
+  
+
+}
+
+counter (時間計測スタート/ストップ、)
+ ↓ 継承
+task（タスク名）
+ ↓ 内包？
+task tree（子孫関係をもつ）
+
+
+init
+
+
+
+
+
+オブジェクトと配列が並列している。
+単純に処理できない形になっている。
+
+
+◆　データ更新／確認
+
+〓　コントロール
+
+★　見た目
+
+
+
+
+==========================
+      グローバル変数
+==========================
+
+projectData
+
+isStopCount
+
+past
+
+
+====================
+      関数
+====================
+
+
+★見た目
+  選択中のタスクにスクロール
+scrollToSelectedTask() {
+
+
+◆データ更新
+  LocalStorageから読み込み
+readProjectData() {
+
+◆データ更新
+  LocalStorageからの読み込み 一番最初の！
+init() {
+
+◆データ更新
+  li.task要素から、データを作成 
+parseTaskObject(_$task) { return taskObject
+
+◆データ更新
+  今のtask-areaのHTMLから、データを抽出する
+parseData() { return projectData
+
+
+★見た目
+  projectDataから、section.task-areaの中身を生成
+generateTaskAreaHTML() {
+
+★見た目
+  タスク配列から、子タスクを含んだ状態でのjQオブジェクトを作成し、appendする
+makeTaskWithChildren(tasks) {
+
+◆データ更新
+  LocalStorageに上書き保存
+saveProjectData() {
+
+◆データ更新
+  LocalStorageから"projectData"を削除
+resetProjectData() {
+
+  // クリックイベント タスク選択
+
+  // クリックイベント 子タスクの 表示／非表示
+
+
+ function toggleStopCount() {
+
+
+calcCount(_duration) {
+
+ // 子要素のcountを合計する
+  // 子要素がなかった場合、0を返す。
+sumChildrenCount(_$target) {
+
+
+    / countを設定
+  // 子孫タスクを持つ場合、合計して設定する。
+  // 持たない場合、そのまま設定する。
+  // タスクに子孫があるか、呼び出し元は考えなくて良い。
+setCount(_$target = $(".selected-task")) {
+ 
+
+setFullCount(_count) {
+
+getFullCount() {
+
+  // 初期読み込み時、子要素を持つタスクのcountを設定する。
+initParentsCount() {
+    
+  // countが変更されたら、その親要素全てに反映させる
+refreshParentsCount() {
+
+addFullCount(_minute) {
+
+initFullCount() {
+
+canDownCount() {
+
+getIndexOfSelectedTask() {
+
+
+refreshHasSelectedChild() {
+
+refreshHasChildren() {
+
+setSelectedTask(_index) {
+
+changeSelectedTask(_direction) {
+
+moveSelectedTask(_direction) {
+
+shiftParent() {
+
+shiftChild() {
+
+deleteSelectedTask() {
+
+doPrompt(_msg = "", _defaultValue = "", _func = console.log) {
+
+renameSelectedTask() {
+
+makeNewTask(_taskObj) {
+
+addTaskAsBrother() {
+
+addDuration(_diff = 0, _$target = $(".selected-task")) {
+
+getDuration(_$target = $(".selected-task")) {
+
+  setInterval
+
+  addEventListener('beforeunload'
+
+  addEventListener("keydown"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
