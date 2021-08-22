@@ -1,3 +1,5 @@
+function dummy() { }
+
 class Counter {
   constructor(duration, preHook, postHook) {
     this.duration = Number.isInteger(duration) ? duration : 0;
@@ -5,15 +7,37 @@ class Counter {
     this.counterID;
     this.past;
     this.delay = 1000;
-    this.preHook = preHook;
-    this.postHook = postHook;
+    this.preHook = preHook || dummy;
+    this.postHook = postHook || dummy;
   }
 
-  getCount() {
+  /** duration 経過ミリ秒を表す。表示には使わない、内部データ。 */
+  calcDuration() {
+    this.duration = this.count * 60_000;
+    return this.duration;
+  }
+
+  addDuration(degrees) {
+    this.duration += degrees;
+    this.calcCount();
+    return this.duration;
+  }
+
+  /** count 経過分を表す。表示に用いるデータ。 */
+  calcCount() {
     this.count = Math.floor(this.duration / 60_000);
     return this.count;
   }
 
+  addCount(degrees) {
+    this.count += degrees;
+    this.calcDuration();
+    return this.count;
+  }
+
+  /** カウント処理部分。setIntervalに渡す。
+   * 前回実行時のとの時間差をミリ秒で取得し、durationに追加する。
+   */
   updateDuration() {
     let now = Date.now();
     let diff = now - this.past;
@@ -21,13 +45,14 @@ class Counter {
     // preHook 処理前に、条件付けでキャンセルする場合などに用いる。
     this.preHook(now, diff);
 
-    this.duration += diff;
+    this.addDuration(diff);
     this.past = now;
 
     // postHook 処理後に、Viewの更新やLocalStorageへ保存する場合などに用いる。
-    this.postHook(this.duration, this.getCount());
+    this.postHook(this.duration, this.count);
   }
 
+  /** カウンターのON／OFF。 */
   start() {
     this.past = Date.now();
     this.counterID = setInterval(
