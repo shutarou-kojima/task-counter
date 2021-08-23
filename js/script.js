@@ -1,13 +1,12 @@
 function dummy() { }
 
 class Counter {
-  constructor(duration, preHook, postHook) {
+  constructor(duration, postHook) {
     this.duration = Number.isInteger(duration) ? duration : 0;
     this.count;
     this.counterID;
     this.past;
     this.delay = 1000;
-    this.preHook = preHook || dummy;
     this.postHook = postHook || dummy;
   }
 
@@ -41,9 +40,6 @@ class Counter {
   updateDuration() {
     let now = Date.now();
     let diff = now - this.past;
-
-    // preHook 処理前に、条件付けでキャンセルする場合などに用いる。
-    this.preHook(now, diff);
 
     this.addDuration(diff);
     this.past = now;
