@@ -61,3 +61,22 @@ class Counter {
     clearInterval(this.counterID);
   }
 }
+class Task extends Counter {
+  constructor(data){
+    super(data.duration, data.postHook);
+    this.name = data.name || "ダミータスク";
+    this.creationDate = new Date();
+    this.memo = data.memo || "";
+  }
+
+  rename(newName){
+    this.name = newName;
+    return this.name;
+  }
+
+  editMemo(text){
+    this.memo = text;
+    return this.memo;
+  }
+
+}
