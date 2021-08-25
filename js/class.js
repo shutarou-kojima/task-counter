@@ -108,5 +108,5 @@ class Project {
 }
 
 
-const p = new Project({postHook:console.log});
-p.start();
+// const p = new Project({postHook:console.log});
+// p.start();
