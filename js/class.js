@@ -1,13 +1,11 @@
-function dummy() { }
-
 class Counter {
-  constructor(duration, postHook) {
-    this.duration = Number.isInteger(duration) ? duration : 0;
+  constructor({ duration, counterHook, delay }) {
+    this.duration = duration || 0;
     this.count;
     this.counterID;
     this.past;
-    this.delay = 1000;
-    this.postHook = postHook || dummy;
+    this.delay = delay || 1000;
+    this.postHook = counterHook || function () { };
   }
 
   /** duration 経過ミリ秒を表す。表示には使わない、内部データ。 */
@@ -62,21 +60,53 @@ class Counter {
   }
 }
 class Task extends Counter {
-  constructor(data){
-    super(data.duration, data.postHook);
+  constructor(data) {
+    super(data);
     this.name = data.name || "ダミータスク";
     this.creationDate = new Date();
     this.memo = data.memo || "";
+    this.children = data.children || [];
   }
-
-  rename(newName){
+  rename(newName) {
     this.name = newName;
     return this.name;
   }
 
-  editMemo(text){
+  editMemo(text) {
     this.memo = text;
     return this.memo;
   }
+}
+
+
+
+// const t = new Task({ postHook: console.log });
+// t.start();
+
+
+class Project {
+  constructor() {
+    this.storageKey = "projectData";
+    let strData = localStorage.getItem(this.storageKey) ?? "templateを入れなきゃ";
+    let projectData = JSON.parse(strData);
+    this.name = projectData.name;
+    this.tasks = projectData.tasks;
+  }
+
+  /** LocalStorageへのデータアクセス */
+  save(){
+    localStorage.setItem(this.storageKey, this.getJSON());
+  }
+
+  reset(){
+
+    this.save();
+  }
+
+
 
 }
+
+
+const p = new Project({postHook:console.log});
+p.start();
